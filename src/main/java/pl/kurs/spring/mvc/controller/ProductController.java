@@ -38,9 +38,9 @@ public class ProductController {
 		return viewAllProducts(model);
 	}
 	
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String removeProduct(@ModelAttribute Product product, ModelMap model) {
-		database.remove(product.getId());
+	@RequestMapping(value = "/remove/", method = RequestMethod.POST)
+	public String removeProduct(@RequestParam("id") int id, ModelMap model) {
+		database.remove(id-1);
 		return viewAllProducts(model);
 	}
 }

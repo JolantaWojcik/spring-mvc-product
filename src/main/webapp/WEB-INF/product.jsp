@@ -22,8 +22,10 @@
 				<td>${p.name}</td>
 				<td>${p.price}</td>
 				<td>${p.category}</td>
-				<td><input type="submit" action="/spring-mvc-product/product/remove/"  method="post"
-					value="Remove" /></td>		
+				<td>
+				<form action="/spring-mvc-product/product/remove/" method="post">
+				 <input type="hidden" name="id" value="${p.id}" />
+				 <input type="submit" value="Remove" />	</form>
 			</tr>
 		</c:forEach>
 	</table>
