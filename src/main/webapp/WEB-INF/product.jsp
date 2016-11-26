@@ -4,16 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	function orderProductBy(criteria){
+		document.getElementById('sortByCriteria').value = criteria;
+		document.getElementById('orderByProductForm').submit();
+	}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Product view</title>
 </head>
 <body>
 <table>
 		<tr bgcolor="silver">
-			<td>Id</td>
-			<td>Product name</td>
-			<td>Price</td>
-			<td>Category</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('id')">Id</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('product_name')">Product name</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('price')">Price</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('category')">Category</td>
 			<td>Action</td>
 		</tr>
 		<c:forEach var="p" items="${product}">
@@ -52,6 +58,10 @@
 					value="Add" /></td>
 			</tr>
 		</table>
+	</form>
+	
+		<form id="orderByProductForm" action="/spring-mvc-product/product/" method="get">
+		<input type="hidden" id="sortByCriteria" name="sortByCriteria" value="id"/>
 	</form>
 </body>
 </html>
