@@ -29,5 +29,11 @@ public class ProdcutSortByImpl implements ProductSortByStrategy{
 		// TODO Auto-generated method stub
 		return sortByMap.get(criteria);
 	}
+	
+	@Override
+	public Comparator<Product> sortByReverse(String criteria) {
+		// TODO Auto-generated method stub
+		return sortByMap.get(criteria).reversed();
+	}
 
 }

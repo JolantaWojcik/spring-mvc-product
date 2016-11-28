@@ -6,4 +6,5 @@ import pl.kurs.spring.mvc.model.Product;
 
 public interface ProductSortByStrategy {
 	Comparator<Product> sortBy(String criteria);
+	Comparator<Product> sortByReverse(String criteria);
 }

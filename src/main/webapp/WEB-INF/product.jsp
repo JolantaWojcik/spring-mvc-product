@@ -5,9 +5,30 @@
 <html>
 <head>
 <script type="text/javascript">
+var sortingOrder=0;
 	function orderProductBy(criteria){
+		sortingOrder = 1;
 		document.getElementById('sortByCriteria').value = criteria;
 		document.getElementById('orderByProductForm').submit();
+	}
+	function reverseOrderProductBy(criteria){
+		sortingOrder = 2;
+		document.getElementById('sortByCriteria').value = criteria;
+		document.getElementById('orderByProductForm').submit();
+	}
+	function order(criteria){
+		console.log(sortingOrder);
+		switch(sortingOrder){
+			case 0:
+				orderProductBy(criteria);
+				break;
+			case 1:
+				reverseOrderProductBy(criteria)
+				break;
+			case 2:
+				orderProductBy(criteria);
+				break;
+		}
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,10 +37,14 @@
 <body>
 <table>
 		<tr bgcolor="silver">
-			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('id')">Id</td>
-			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('product_name')">Product name</td>
-			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('price')">Price</td>
-			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" onclick="orderProductBy('category')">Category</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" 
+				onclick="orderProductBy('id')">Id</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" 
+				onclick="orderProductBy('product_name')">Product name</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" 
+				onclick="orderProductBy('price')">Price</td>
+			<td onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor='default'" 
+			onclick="order('category')">Category</td>
 			<td>Action</td>
 		</tr>
 		<c:forEach var="p" items="${product}">

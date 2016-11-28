@@ -22,6 +22,7 @@ public class ProductController {
 	private List<Product> database;
 	@Autowired
 	private ProductSortByStrategy sortBy;
+	int sort = 0;
 
 	@PostConstruct
 	public void init() {
@@ -30,11 +31,36 @@ public class ProductController {
 		database.add(new Product("Shoes", 145, "Clothes"));
 	}
 
+	//xhr
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String viewAllProducts(@RequestParam(value= "sortByCriteria", defaultValue="id") String criteria, ModelMap model) {
-		database.sort(sortBy.sortBy(criteria));
+		order(criteria);
+		//database.sort(sortBy.sortBy(criteria));
 		model.addAttribute("product", database);
 		return "product";
+	}
+	
+	public void orderAsc(String criteria){
+		sort = 1;
+		database.sort(sortBy.sortBy(criteria));
+	}
+	public void orderDsc(String criteria){
+		sort = 2;
+		database.sort(sortBy.sortByReverse(criteria));
+	}
+	
+	public void order(String criteria){
+		switch(sort){
+			case 0:
+				orderAsc(criteria);
+				break;
+			case 1:
+				orderDsc(criteria);
+				break;
+			case 2:
+				orderAsc(criteria);
+				break;
+		}
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
